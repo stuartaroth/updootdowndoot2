@@ -1,8 +1,0 @@
-name: updootdowndoot2
-static_sites:
-  - environment_slug: html
-    github:
-      branch: main
-      deploy_on_push: true
-      repo: stuartaroth/updootdowndoot2
-    name: updootdowndoot2
