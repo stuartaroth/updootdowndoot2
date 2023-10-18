@@ -1,0 +1,8 @@
+spec:
+  name: updootdowndoot2
+  static_sites:
+    - environment_slug: html
+      git:
+        branch: main
+        repo_clone_url: https://github.com/stuartaroth/updootdowndoot2
+      name: updootdowndoot2

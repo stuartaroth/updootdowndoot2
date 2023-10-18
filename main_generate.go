@@ -130,6 +130,10 @@ func cleanGeneratedDir(generatedDir string) error {
 	}
 
 	for _, e := range entries {
+		if e.Name() == ".do" {
+			continue
+		}
+
 		fullPath := fmt.Sprintf("%v/%v", generatedDir, e.Name())
 		if e.IsDir() {
 			err = os.RemoveAll(fullPath)
