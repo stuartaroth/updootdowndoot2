@@ -46,15 +46,49 @@ func mainGenerate() {
 		log.Fatal(err)
 	}
 
+	linkFilenames := make(map[string]string)
+
 	for _, list := range lists {
-		err = generateListHtml(list, listTemplate, itemTemplate, generatedDir)
+		outputFilename := getOutputFilename(list.Name)
+		linkFilenames[outputFilename] = list.Name
+		err = generateListHtml(list, listTemplate, itemTemplate, generatedDir, outputFilename)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
+
+	err = generateIndexHtml(linkFilenames, indexTemplate, linkTemplate, generatedDir)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
-func generateListHtml(list VotingList, listTemplate string, itemTemplate string, generatedDir string) error {
+func generateIndexHtml(linkFilenames map[string]string, indexTemplate string, linkTemplate string, generatedDir string) error {
+	links := []string{}
+	for key, value := range linkFilenames {
+		localLinkTemplate := linkTemplate
+		localLinkTemplate = strings.Replace(localLinkTemplate, "$link", key, -1)
+		localLinkTemplate = strings.Replace(localLinkTemplate, "$name", value, -1)
+		links = append(links, localLinkTemplate)
+	}
+
+	joinedLinks := strings.Join(links, "\n")
+	localIndexTemplate := indexTemplate
+	localIndexTemplate = strings.Replace(localIndexTemplate, "$links", joinedLinks, -1)
+
+	fullPath := fmt.Sprintf("%v/%v", generatedDir, "index.html")
+	return os.WriteFile(fullPath, []byte(localIndexTemplate), 066)
+}
+
+func getOutputFilename(name string) string {
+	outputFilename := name
+	outputFilename = strings.Replace(outputFilename, " ", "-", -1)
+	outputFilename = strings.ToLower(outputFilename)
+	outputFilename = fmt.Sprintf("%v.html", outputFilename)
+	return outputFilename
+}
+
+func generateListHtml(list VotingList, listTemplate string, itemTemplate string, generatedDir string, outputFilename string) error {
 	itemTemplates := []string{}
 	for _, item := range list.Items {
 		localItemTemplate := itemTemplate
@@ -71,10 +105,6 @@ func generateListHtml(list VotingList, listTemplate string, itemTemplate string,
 	localListTemplate = strings.Replace(localListTemplate, "$title", list.Name, -1)
 	localListTemplate = strings.Replace(localListTemplate, "$items", joinedItemTemplates, -1)
 
-	outputFilename := list.Name
-	outputFilename = strings.Replace(outputFilename, " ", "-", -1)
-	outputFilename = strings.ToLower(outputFilename)
-	outputFilename = fmt.Sprintf("%v.html", outputFilename)
 	fullPath := fmt.Sprintf("%v/%v", generatedDir, outputFilename)
 	return os.WriteFile(fullPath, []byte(localListTemplate), 066)
 }
