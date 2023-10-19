@@ -1,0 +1,505 @@
+{
+    "name": "Spooky Films and Franchises",
+    "items": [
+        {
+            "name": "Nosferatu",
+            "year": "1922",
+            "link": "https://boxd.it/29TM"
+        },
+        {
+            "name": "Dracula",
+            "year": "1931",
+            "link": "https://boxd.it/2b34"
+        },
+        {
+            "name": "Frankenstein",
+            "year": "1931",
+            "link": "https://boxd.it/25Te"
+        },
+        {
+            "name": "Psycho",
+            "year": "1960",
+            "link": "https://boxd.it/2ab2"
+        },
+        {
+            "name": "The Birds",
+            "year": "1963",
+            "link": "https://boxd.it/2a6m"
+        },
+        {
+            "name": "It's the Great Pumpkin, Charlie Brown",
+            "year": "1966",
+            "link": "https://boxd.it/1Qmu"
+        },
+        {
+            "name": "Night of the Living Dead",
+            "year": "1968",
+            "link": "https://boxd.it/1WwA"
+        },
+        {
+            "name": "The Exorcist",
+            "year": "1973",
+            "link": "https://boxd.it/1Yoo"
+        },
+        {
+            "name": "The Wicker Man",
+            "year": "1973",
+            "link": "https://boxd.it/1KnG"
+        },
+        {
+            "name": "Black Christmas",
+            "year": "1974",
+            "link": "https://boxd.it/1Js6"
+        },
+        {
+            "name": "The Texas Chain Saw Massacre",
+            "year": "1974",
+            "link": "https://boxd.it/1lcS"
+        },
+        {
+            "name": "Jaws",
+            "year": "1975",
+            "link": "https://boxd.it/2a5e"
+        },
+        {
+            "name": "The Rocky Horror Picture Show",
+            "year": "1975",
+            "link": "https://boxd.it/1a3q"
+        },
+        {
+            "name": "Halloween",
+            "year": "1978",
+            "link": "https://boxd.it/2wRu"
+        },
+        {
+            "name": "Alien",
+            "year": "1979",
+            "link": "https://boxd.it/2awY"
+        },
+        {
+            "name": "Friday the 13th",
+            "year": "1980",
+            "link": "https://boxd.it/24fs"
+        },
+        {
+            "name": "The Fog",
+            "year": "1980",
+            "link": "https://boxd.it/29Cc"
+        },
+        {
+            "name": "The Shining",
+            "year": "1980",
+            "link": "https://boxd.it/29Nu"
+        },
+        {
+            "name": "The Evil Dead",
+            "year": "1981",
+            "link": "https://boxd.it/29Go"
+        },
+        {
+            "name": "Poltergeist",
+            "year": "1982",
+            "link": "https://boxd.it/2a0o"
+        },
+        {
+            "name": "The Thing",
+            "year": "1982",
+            "link": "https://boxd.it/294O"
+        },
+        {
+            "name": "Videodrome",
+            "year": "1983",
+            "link": "https://boxd.it/29uC"
+        },
+        {
+            "name": "A Nightmare on Elm Street",
+            "year": "1984",
+            "link": "https://boxd.it/2aw0"
+        },
+        {
+            "name": "Gremlins",
+            "year": "1984",
+            "link": "https://boxd.it/29gg"
+        },
+        {
+            "name": "Night of the Comet",
+            "year": "1984",
+            "link": "https://boxd.it/1GUw"
+        },
+        {
+            "name": "Re-Animator",
+            "year": "1985",
+            "link": "https://boxd.it/28hM"
+        },
+        {
+            "name": "Little Shop of Horrors",
+            "year": "1986",
+            "link": "https://boxd.it/1Vqm"
+        },
+        {
+            "name": "The Fly",
+            "year": "1986",
+            "link": "https://boxd.it/1YIe"
+        },
+        {
+            "name": "Hellraiser",
+            "year": "1987",
+            "link": "https://boxd.it/1Zpi"
+        },
+        {
+            "name": "Predator",
+            "year": "1987",
+            "link": "https://boxd.it/2b84"
+        },
+        {
+            "name": "Beetlejuice",
+            "year": "1988",
+            "link": "https://boxd.it/24QI"
+        },
+        {
+            "name": "Child's Play",
+            "year": "1988",
+            "link": "https://boxd.it/1VTo"
+        },
+        {
+            "name": "Ernest Scared Stupid",
+            "year": "1991",
+            "link": "https://boxd.it/1gGS"
+        },
+        {
+            "name": "The Addams Family",
+            "year": "1991",
+            "link": "https://boxd.it/267g"
+        },
+        {
+            "name": "The Silence of the Lambs",
+            "year": "1991",
+            "link": "https://boxd.it/2aHW"
+        },
+        {
+            "name": "Candyman",
+            "year": "1992",
+            "link": "https://boxd.it/1Ys6"
+        },
+        {
+            "name": "Hocus Pocus",
+            "year": "1993",
+            "link": "https://boxd.it/1Wgi"
+        },
+        {
+            "name": "The Nightmare Before Christmas",
+            "year": "1993",
+            "link": "https://boxd.it/1YzQ"
+        },
+        {
+            "name": "Casper",
+            "year": "1995",
+            "link": "https://boxd.it/1ZMw"
+        },
+        {
+            "name": "Scream",
+            "year": "1996",
+            "link": "https://boxd.it/24EC"
+        },
+        {
+            "name": "Halloweentown",
+            "year": "1998",
+            "link": "https://boxd.it/1qPq"
+        },
+        {
+            "name": "The Blair Witch Project",
+            "year": "1999",
+            "link": "https://boxd.it/26ua"
+        },
+        {
+            "name": "The Sixth Sense",
+            "year": "1999",
+            "link": "https://boxd.it/29Js"
+        },
+        {
+            "name": "Final Destination",
+            "year": "2000",
+            "link": "https://boxd.it/1YrC"
+        },
+        {
+            "name": "Scary Movie",
+            "year": "2000",
+            "link": "https://boxd.it/24CG"
+        },
+        {
+            "name": "What Lies Beneath",
+            "year": "2000",
+            "link": "https://boxd.it/26v8"
+        },
+        {
+            "name": "Signs",
+            "year": "2002",
+            "link": "https://boxd.it/26t2"
+        },
+        {
+            "name": "The Mothman Prophecies",
+            "year": "2002",
+            "link": "https://boxd.it/26xo"
+        },
+        {
+            "name": "The Ring",
+            "year": "2002",
+            "link": "https://boxd.it/2a70"
+        },
+        {
+            "name": "House of 1000 Corpses",
+            "year": "2003",
+            "link": "https://boxd.it/26uE"
+        },
+        {
+            "name": "Willard",
+            "year": "2003",
+            "link": "https://boxd.it/1V3i"
+        },
+        {
+            "name": "Saw",
+            "year": "2004",
+            "link": "https://boxd.it/2aWW"
+        },
+        {
+            "name": "Shaun of the Dead",
+            "year": "2004",
+            "link": "https://boxd.it/29J8"
+        },
+        {
+            "name": "The Grudge",
+            "year": "2004",
+            "link": "https://boxd.it/27Jq"
+        },
+        {
+            "name": "The Village",
+            "year": "2004",
+            "link": "https://boxd.it/21iS"
+        },
+        {
+            "name": "Corpse Bride",
+            "year": "2005",
+            "link": "https://boxd.it/24WQ"
+        },
+        {
+            "name": "1408",
+            "year": "2007",
+            "link": "https://boxd.it/25Vu"
+        },
+        {
+            "name": "Disturbia",
+            "year": "2007",
+            "link": "https://boxd.it/20rk"
+        },
+        {
+            "name": "Paranormal Activity",
+            "year": "2007",
+            "link": "https://boxd.it/1yIM"
+        },
+        {
+            "name": "Trick 'r Treat",
+            "year": "2007",
+            "link": "https://boxd.it/1zvE"
+        },
+        {
+            "name": "[REC]",
+            "year": "2007",
+            "link": "https://boxd.it/20ma"
+        },
+        {
+            "name": "Cloverfield",
+            "year": "2008",
+            "link": "https://boxd.it/2192"
+        },
+        {
+            "name": "Zombieland",
+            "year": "2009",
+            "link": "https://boxd.it/1En6"
+        },
+        {
+            "name": "Insidious",
+            "year": "2010",
+            "link": "https://boxd.it/H4k"
+        },
+        {
+            "name": "Apollo 18",
+            "year": "2011",
+            "link": "https://boxd.it/DQu"
+        },
+        {
+            "name": "The Cabin in the Woods",
+            "year": "2011",
+            "link": "https://boxd.it/1zOc"
+        },
+        {
+            "name": "You're Next",
+            "year": "2011",
+            "link": "https://boxd.it/2WWK"
+        },
+        {
+            "name": "Sinister",
+            "year": "2012",
+            "link": "https://boxd.it/2TnW"
+        },
+        {
+            "name": "The Woman in Black",
+            "year": "2012",
+            "link": "https://boxd.it/4wu"
+        },
+        {
+            "name": "V/H/S",
+            "year": "2012",
+            "link": "https://boxd.it/2Y1c"
+        },
+        {
+            "name": "The Conjuring",
+            "year": "2013",
+            "link": "https://boxd.it/4sr2"
+        },
+        {
+            "name": "The Purge",
+            "year": "2013",
+            "link": "https://boxd.it/4Xg0"
+        },
+        {
+            "name": "Warm Bodies",
+            "year": "2013",
+            "link": "https://boxd.it/2TFm"
+        },
+        {
+            "name": "Creep",
+            "year": "2014",
+            "link": "https://boxd.it/7l4c"
+        },
+        {
+            "name": "It Follows",
+            "year": "2014",
+            "link": "https://boxd.it/87wo"
+        },
+        {
+            "name": "The Babadook",
+            "year": "2014",
+            "link": "https://boxd.it/77xu"
+        },
+        {
+            "name": "Goosebumps",
+            "year": "2015",
+            "link": "https://boxd.it/7Bp6"
+        },
+        {
+            "name": "Hell House LLC",
+            "year": "2015",
+            "link": "https://boxd.it/cdjy"
+        },
+        {
+            "name": "Krampus",
+            "year": "2015",
+            "link": "https://boxd.it/8Wy6"
+        },
+        {
+            "name": "The Visit",
+            "year": "2015",
+            "link": "https://boxd.it/9ssO"
+        },
+        {
+            "name": "The Witch",
+            "year": "2015",
+            "link": "https://boxd.it/9X0m"
+        },
+        {
+            "name": "Lights Out",
+            "year": "2016",
+            "link": "https://boxd.it/bAHc"
+        },
+        {
+            "name": "The Autopsy of Jane Doe",
+            "year": "2016",
+            "link": "https://boxd.it/dUu2"
+        },
+        {
+            "name": "The Boy",
+            "year": "2016",
+            "link": "https://boxd.it/apZi"
+        },
+        {
+            "name": "Train to Busan",
+            "year": "2016",
+            "link": "https://boxd.it/dSQU"
+        },
+        {
+            "name": "Get Out",
+            "year": "2017",
+            "link": "https://boxd.it/eOCm"
+        },
+        {
+            "name": "Happy Death Day",
+            "year": "2017",
+            "link": "https://boxd.it/fDz4"
+        },
+        {
+            "name": "It",
+            "year": "2017",
+            "link": "https://boxd.it/bC8e"
+        },
+        {
+            "name": "The Babysitter",
+            "year": "2017",
+            "link": "https://boxd.it/eP1w"
+        },
+        {
+            "name": "A Quiet Place",
+            "year": "2018",
+            "link": "https://boxd.it/fVJQ"
+        },
+        {
+            "name": "Hereditary",
+            "year": "2018",
+            "link": "https://boxd.it/hNVe"
+        },
+        {
+            "name": "The Nun",
+            "year": "2018",
+            "link": "https://boxd.it/fBkw"
+        },
+        {
+            "name": "Color Out of Space",
+            "year": "2019",
+            "link": "https://boxd.it/k1HY"
+        },
+        {
+            "name": "Midsommar",
+            "year": "2019",
+            "link": "https://boxd.it/jhxe"
+        },
+        {
+            "name": "Ready or Not",
+            "year": "2019",
+            "link": "https://boxd.it/kOf0"
+        },
+        {
+            "name": "Scary Stories to Tell in the Dark",
+            "year": "2019",
+            "link": "https://boxd.it/eJTW"
+        },
+        {
+            "name": "The Lighthouse",
+            "year": "2019",
+            "link": "https://boxd.it/icFU"
+        },
+        {
+            "name": "Us",
+            "year": "2019",
+            "link": "https://boxd.it/gnV6"
+        },
+        {
+            "name": "M3GAN",
+            "year": "2022",
+            "link": "https://boxd.it/jxmG"
+        },
+        {
+            "name": "No One Will Save You",
+            "year": "2023",
+            "link": "https://boxd.it/uUO6"
+        }
+    ]
+}
