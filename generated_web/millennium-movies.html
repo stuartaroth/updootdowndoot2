@@ -75,8 +75,8 @@
                 const split = key.split("_____");
                 const uuid = split[1];
                 const value = localStorage.getItem(key);
-                const id = '#' + uuid + "-" + value;
-                const element = document.querySelector(id);
+                const id = uuid + "-" + value;
+                const element = document.getElementById(id);
                 if (element) {
                     element.checked = true;
                 }
@@ -86,7 +86,7 @@
 
         window.addEventListener('load', function () {
             loadExistingRatings();
-            const element = document.querySelector('#list-main-div');
+            const element = document.getElementById('list-main-div');
             if (element) {
                 element.hidden = false;
             }
