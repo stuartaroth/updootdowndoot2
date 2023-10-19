@@ -89,13 +89,18 @@ func getOutputFilename(name string) string {
 }
 
 func generateListHtml(list VotingList, listTemplate string, itemTemplate string, generatedDir string, outputFilename string) error {
+	err := checkVotingList(list)
+	if err != nil {
+		return err
+	}
+
 	itemTemplates := []string{}
 	for _, item := range list.Items {
 		localItemTemplate := itemTemplate
 		localItemTemplate = strings.Replace(localItemTemplate, "$name", item.Name, -1)
 		localItemTemplate = strings.Replace(localItemTemplate, "$year", item.Year, -1)
 		localItemTemplate = strings.Replace(localItemTemplate, "$link", item.Link, -1)
-		localItemTemplate = strings.Replace(localItemTemplate, "$uuid", item.Uuid, -1)
+		localItemTemplate = strings.Replace(localItemTemplate, "$uniqueKey", item.UniqueKey(), -1)
 		itemTemplates = append(itemTemplates, localItemTemplate)
 	}
 
@@ -107,6 +112,19 @@ func generateListHtml(list VotingList, listTemplate string, itemTemplate string,
 
 	fullPath := fmt.Sprintf("%v/%v", generatedDir, outputFilename)
 	return os.WriteFile(fullPath, []byte(localListTemplate), 066)
+}
+
+func checkVotingList(list VotingList) error {
+	uniqueNames := make(map[string]bool)
+	for _, item := range list.Items {
+		uniqueNames[item.UniqueKey()] = true
+	}
+
+	if len(uniqueNames) != len(list.Items) {
+		return errors.New("list needs to have unique name and year items")
+	}
+
+	return nil
 }
 
 func getVotingLists(jsonDir string) ([]VotingList, error) {

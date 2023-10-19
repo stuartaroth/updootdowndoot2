@@ -4,33 +4,33 @@
     <td><a href="$link" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
         <div class="btn-group">
-            <input type="radio" class="btn-check" name="$uuid-feelings" id="$uuid-unseen" autocomplete="off" checked />
-            <label class="btn btn-secondary" for="$uuid-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-feelings" id="$uniqueKey-unseen" autocomplete="off" onclick="updateFeelings('$uniqueKey', 'unseen')" checked />
+            <label class="btn btn-secondary" for="$uniqueKey-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-feelings" id="$uuid-dislike" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-feelings" id="$uniqueKey-dislike" autocomplete="off" onclick="updateFeelings('$uniqueKey', 'dislike')" />
+            <label class="btn btn-secondary" for="$uniqueKey-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-feelings" id="$uuid-fine" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-fine"><i class="fa-regular fa-face-meh"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-feelings" id="$uniqueKey-fine" autocomplete="off" onclick="updateFeelings('$uniqueKey', 'fine')" />
+            <label class="btn btn-secondary" for="$uniqueKey-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-feelings" id="$uuid-like" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-like"><i class="fa-regular fa-thumbs-up"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-feelings" id="$uniqueKey-like" autocomplete="off" onclick="updateFeelings('$uniqueKey', 'like')" />
+            <label class="btn btn-secondary" for="$uniqueKey-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-feelings" id="$uuid-love" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-love"><i class="fa-regular fa-heart"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-feelings" id="$uniqueKey-love" autocomplete="off" onclick="updateFeelings('$uniqueKey', 'love')" />
+            <label class="btn btn-secondary" for="$uniqueKey-love"><i class="fa-regular fa-heart"></i></label>
         </div>
         &nbsp;
         &nbsp;
         &nbsp;
         <div class="btn-group">
-            <input type="radio" class="btn-check" name="$uuid-technical" id="$uuid-bad" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-bad"><i class="fa-solid fa-poo"></i></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-technical" id="$uniqueKey-bad" autocomplete="off" onclick="updateTechnical('$uniqueKey', 'bad')" />
+            <label class="btn btn-secondary" for="$uniqueKey-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-technical" id="$uuid-neutral" autocomplete="off" checked />
-            <label class="btn btn-secondary" for="$uuid-neutral"><i class="fa-solid fa-minus"></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-technical" id="$uniqueKey-neutral" autocomplete="off" onclick="updateTechnical('$uniqueKey', 'neutral')" checked />
+            <label class="btn btn-secondary" for="$uniqueKey-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="$uuid-technical" id="$uuid-good" autocomplete="off" />
-            <label class="btn btn-secondary" for="$uuid-good"><i class="fa-solid fa-trophy"></i></i></label>
+            <input type="radio" class="btn-check" name="$uniqueKey-technical" id="$uniqueKey-good" autocomplete="off" onclick="updateTechnical('$uniqueKey', 'good')" />
+            <label class="btn btn-secondary" for="$uniqueKey-good"><i class="fa-solid fa-trophy"></i></i></label>
         </div>
     </td>
 </tr>

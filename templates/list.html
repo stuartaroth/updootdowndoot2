@@ -27,15 +27,76 @@
 </head>
 <body>
 <script>
-    function update() {
-        console.log("yo");
-        const exampleEl = document.querySelector('#dislike');
-        console.log(exampleEl);
-        exampleEl.checked = true;
+    const rawTitle = '$title';
+    const title = rawTitle.replaceAll(" ", "_").toLowerCase();
+
+    function updateFeelings(uuid, choice) {
+        removeOrSetLocalStorage(uuid, choice, "feelings", "unseen");
     }
+
+    function updateTechnical(uuid, choice) {
+        removeOrSetLocalStorage(uuid, choice, "technical", "neutral");
+    }
+
+    function removeOrSetLocalStorage(uuid, choice, ending, removalEquality) {
+        const key = title + "_____" + uuid + "_____" + ending;
+        if (choice === removalEquality) {
+            localStorage.removeItem(key);
+        } else {
+            localStorage.setItem(key, choice);
+        }
+    }
+
+    function downloadResults() {
+        const results = [];
+        const checkedElements = document.querySelectorAll('input:checked');
+        checkedElements.forEach(function (e) {
+           results.push(e.id);
+        });
+
+        const localJson = JSON.stringify(results);
+
+        const a = document.createElement('a');
+        document.body.appendChild(a);
+
+        a.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(localJson));
+        a.setAttribute('download', title + '_your_name_here.json');
+        a.click();
+    }
+
+    function loadExistingRatings() {
+        const allKeys = Object.keys(localStorage);
+
+        const allRelevantKeys = allKeys.filter(function (key) {
+            return key.startsWith(title);
+        });
+
+        allRelevantKeys.forEach(function(key) {
+            const split = key.split("_____");
+            const uuid = split[1];
+            const value = localStorage.getItem(key);
+            const id = '#' + uuid + "-" + value;
+            const element = document.querySelector(id);
+            if (element) {
+                element.checked = true;
+            }
+
+        });
+    }
+
+    window.addEventListener('load', function () {
+        loadExistingRatings();
+        const element = document.querySelector('#list-main-div');
+        if (element) {
+            element.hidden = false;
+        }
+    })
+
 </script>
 
-<div>
+<div id="list-main-div" hidden>
+    <h1 class="mb-3">$title</h1>
+    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current ratings</button></div>
     <table class="table">
         <thead>
         <tr>
@@ -49,9 +110,7 @@
             $items
         </tbody>
     </table>
-</div>
-<div class="btn" onclick="update()">
-    Click Me
+    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current results</button></div>
 </div>
 </body>
 </html>

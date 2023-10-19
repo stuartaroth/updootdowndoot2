@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
-	"github.com/google/uuid"
 	"log"
 	"os"
 	"sort"
@@ -44,13 +43,7 @@ func mainLetterboxd() {
 	}
 
 	for _, record := range records {
-		id, err := uuid.NewUUID()
-		if err != nil {
-			continue
-		}
-
 		item := VotingItem{
-			Uuid: id.String(),
 			Name: record[1],
 			Year: record[2],
 			Link: record[3],

@@ -2,166 +2,166 @@
     "name": "letterboxd-example-input.csv",
     "items": [
         {
-            "uuid": "b35122e8-6d5c-11ee-93df-0a002700000a",
             "name": "Fight Club",
             "year": "1999",
-            "link": "https://boxd.it/2a9q"
+            "link": "https://boxd.it/2a9q",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e0-0a002700000a",
             "name": "Galaxy Quest",
             "year": "1999",
-            "link": "https://boxd.it/29gq"
+            "link": "https://boxd.it/29gq",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93da-0a002700000a",
             "name": "Star Wars: Episode I – The Phantom Menace",
             "year": "1999",
-            "link": "https://boxd.it/27Vc"
+            "link": "https://boxd.it/27Vc",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e1-0a002700000a",
             "name": "The Blair Witch Project",
             "year": "1999",
-            "link": "https://boxd.it/26ua"
+            "link": "https://boxd.it/26ua",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93ee-0a002700000a",
             "name": "The Mummy",
             "year": "1999",
-            "link": "https://boxd.it/2a7a"
+            "link": "https://boxd.it/2a7a",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93de-0a002700000a",
             "name": "The Sixth Sense",
             "year": "1999",
-            "link": "https://boxd.it/29Js"
+            "link": "https://boxd.it/29Js",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e3-0a002700000a",
             "name": "Cast Away",
             "year": "2000",
-            "link": "https://boxd.it/20i8"
+            "link": "https://boxd.it/20i8",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e2-0a002700000a",
             "name": "O Brother, Where Art Thou?",
             "year": "2000",
-            "link": "https://boxd.it/2b3I"
+            "link": "https://boxd.it/2b3I",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e7-0a002700000a",
             "name": "Unbreakable",
             "year": "2000",
-            "link": "https://boxd.it/1XV2"
+            "link": "https://boxd.it/1XV2",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93d9-0a002700000a",
             "name": "X-Men",
             "year": "2000",
-            "link": "https://boxd.it/1a7s"
+            "link": "https://boxd.it/1a7s",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93f0-0a002700000a",
             "name": "Harry Potter and the Philosopher's Stone",
             "year": "2001",
-            "link": "https://boxd.it/29QS"
+            "link": "https://boxd.it/29QS",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e4-0a002700000a",
             "name": "Ocean's Eleven",
             "year": "2001",
-            "link": "https://boxd.it/2aZm"
+            "link": "https://boxd.it/2aZm",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93d8-0a002700000a",
             "name": "Shrek",
             "year": "2001",
-            "link": "https://boxd.it/29zi"
+            "link": "https://boxd.it/29zi",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93dd-0a002700000a",
             "name": "The Fast and the Furious",
             "year": "2001",
-            "link": "https://boxd.it/1XMu"
+            "link": "https://boxd.it/1XMu",
+            "description": ""
         },
         {
-            "uuid": "b350aa26-6d5c-11ee-93d7-0a002700000a",
             "name": "The Lord of the Rings: The Fellowship of the Ring",
             "year": "2001",
-            "link": "https://boxd.it/2b5O"
+            "link": "https://boxd.it/2b5O",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93ea-0a002700000a",
             "name": "A Walk to Remember",
             "year": "2002",
-            "link": "https://boxd.it/1WLq"
+            "link": "https://boxd.it/1WLq",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93ec-0a002700000a",
             "name": "About a Boy",
             "year": "2002",
-            "link": "https://boxd.it/2aMC"
+            "link": "https://boxd.it/2aMC",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e5-0a002700000a",
             "name": "Catch Me If You Can",
             "year": "2002",
-            "link": "https://boxd.it/29VS"
+            "link": "https://boxd.it/29VS",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e8-0a002700000a",
             "name": "Kung Pow: Enter the Fist",
             "year": "2002",
-            "link": "https://boxd.it/1SQm"
+            "link": "https://boxd.it/1SQm",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e9-0a002700000a",
             "name": "Minority Report",
             "year": "2002",
-            "link": "https://boxd.it/2aWi"
+            "link": "https://boxd.it/2aWi",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93eb-0a002700000a",
             "name": "Scooby-Doo",
             "year": "2002",
-            "link": "https://boxd.it/1YaQ"
+            "link": "https://boxd.it/1YaQ",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93d7-0a002700000a",
             "name": "Spider-Man",
             "year": "2002",
-            "link": "https://boxd.it/2a8i"
+            "link": "https://boxd.it/2a8i",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93ef-0a002700000a",
             "name": "The Count of Monte Cristo",
             "year": "2002",
-            "link": "https://boxd.it/1U24"
+            "link": "https://boxd.it/1U24",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93ed-0a002700000a",
             "name": "The Mothman Prophecies",
             "year": "2002",
-            "link": "https://boxd.it/26xo"
+            "link": "https://boxd.it/26xo",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93e6-0a002700000a",
             "name": "The Ring",
             "year": "2002",
-            "link": "https://boxd.it/2a70"
+            "link": "https://boxd.it/2a70",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93dc-0a002700000a",
             "name": "Big Fish",
             "year": "2003",
-            "link": "https://boxd.it/2a3M"
+            "link": "https://boxd.it/2a3M",
+            "description": ""
         },
         {
-            "uuid": "b35122e8-6d5c-11ee-93db-0a002700000a",
             "name": "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
             "year": "2005",
-            "link": "https://boxd.it/2ark"
+            "link": "https://boxd.it/2ark",
+            "description": ""
         }
     ]
 }
