@@ -26,1089 +26,1118 @@
     ></script>
 </head>
 <body>
-<script>
-    const rawTitle = 'Millennium Movies';
-    const title = rawTitle.replaceAll(" ", "_").toLowerCase();
+    <script>
+        const rawTitle = 'Millennium Movies';
+        const title = rawTitle.replaceAll(" ", "_").toLowerCase();
 
-    function updateFeelings(uuid, choice) {
-        removeOrSetLocalStorage(uuid, choice, "feelings", "unseen");
-    }
-
-    function updateTechnical(uuid, choice) {
-        removeOrSetLocalStorage(uuid, choice, "technical", "neutral");
-    }
-
-    function removeOrSetLocalStorage(uuid, choice, ending, removalEquality) {
-        const key = title + "_____" + uuid + "_____" + ending;
-        if (choice === removalEquality) {
-            localStorage.removeItem(key);
-        } else {
-            localStorage.setItem(key, choice);
+        function updateFeelings(uuid, choice) {
+            removeOrSetLocalStorage(uuid, choice, "feelings", "unseen");
         }
-    }
 
-    function downloadResults() {
-        const results = [];
-        const checkedElements = document.querySelectorAll('input:checked');
-        checkedElements.forEach(function (e) {
-           results.push(e.id);
-        });
+        function updateTechnical(uuid, choice) {
+            removeOrSetLocalStorage(uuid, choice, "technical", "neutral");
+        }
 
-        const localJson = JSON.stringify(results);
-
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-
-        a.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(localJson));
-        a.setAttribute('download', title + '_your_name_here.json');
-        a.click();
-    }
-
-    function loadExistingRatings() {
-        const allKeys = Object.keys(localStorage);
-
-        const allRelevantKeys = allKeys.filter(function (key) {
-            return key.startsWith(title);
-        });
-
-        allRelevantKeys.forEach(function(key) {
-            const split = key.split("_____");
-            const uuid = split[1];
-            const value = localStorage.getItem(key);
-            const id = '#' + uuid + "-" + value;
-            const element = document.querySelector(id);
-            if (element) {
-                element.checked = true;
+        function removeOrSetLocalStorage(uuid, choice, ending, removalEquality) {
+            const key = title + "_____" + uuid + "_____" + ending;
+            if (choice === removalEquality) {
+                localStorage.removeItem(key);
+            } else {
+                localStorage.setItem(key, choice);
             }
-
-        });
-    }
-
-    window.addEventListener('load', function () {
-        loadExistingRatings();
-        const element = document.querySelector('#list-main-div');
-        if (element) {
-            element.hidden = false;
         }
-    })
 
-</script>
+        function downloadResults() {
+            const results = [];
+            const checkedElements = document.querySelectorAll('input:checked');
+            checkedElements.forEach(function (e) {
+               results.push(e.id);
+            });
 
-<div id="list-main-div" hidden>
-    <h1 class="mb-3">Millennium Movies</h1>
-    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current ratings</button></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Year</th>
-            <th scope="col">Link</th>
-            <th scope="col">Ratings</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-    <td>Fight Club</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/2a9q" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
-    <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-unseen" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="fight-club-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+            const localJson = JSON.stringify(results);
 
-            <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-dislike" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="fight-club-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+            const a = document.createElement('a');
+            document.body.appendChild(a);
 
-            <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-fine" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'fine')" />
-            <label class="btn btn-secondary" for="fight-club-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+            a.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(localJson));
+            a.setAttribute('download', title + '_your_name_here.json');
+            a.click();
+        }
 
-            <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-like" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'like')" />
-            <label class="btn btn-secondary" for="fight-club-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+        function loadExistingRatings() {
+            const allKeys = Object.keys(localStorage);
 
-            <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-love" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'love')" />
-            <label class="btn btn-secondary" for="fight-club-1999-love"><i class="fa-regular fa-heart"></i></label>
+            const allRelevantKeys = allKeys.filter(function (key) {
+                return key.startsWith(title);
+            });
+
+            allRelevantKeys.forEach(function(key) {
+                const split = key.split("_____");
+                const uuid = split[1];
+                const value = localStorage.getItem(key);
+                const id = '#' + uuid + "-" + value;
+                const element = document.querySelector(id);
+                if (element) {
+                    element.checked = true;
+                }
+
+            });
+        }
+
+        window.addEventListener('load', function () {
+            loadExistingRatings();
+            const element = document.querySelector('#list-main-div');
+            if (element) {
+                element.hidden = false;
+            }
+        })
+    </script>
+
+    <div id="list-main-div" class="text-center" hidden>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1 class="mb-3">Millennium Movies</h1>
+            </div>
         </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-bad" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'bad')" />
-            <label class="btn btn-secondary" for="fight-club-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-neutral" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="fight-club-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+        <table class="table">
+            <tbody>
+                <tr>
+    <td>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Fight Club (1999) <a href="https://boxd.it/2a9q" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-unseen" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="fight-club-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-good" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'good')" />
-            <label class="btn btn-secondary" for="fight-club-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-dislike" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+
+                    <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-fine" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+
+                    <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-like" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'like')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+
+                    <input type="radio" class="btn-check" name="fight-club-1999-feelings" id="fight-club-1999-love" autocomplete="off" onclick="updateFeelings('fight-club-1999', 'love')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-bad" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+
+                    <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-neutral" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="fight-club-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+
+                    <input type="radio" class="btn-check" name="fight-club-1999-technical" id="fight-club-1999-good" autocomplete="off" onclick="updateTechnical('fight-club-1999', 'good')" />
+                    <label class="btn btn-secondary" for="fight-club-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Galaxy Quest</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/29gq" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-unseen" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Galaxy Quest (1999) <a href="https://boxd.it/29gq" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-unseen" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-dislike" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-dislike" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-fine" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'fine')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-fine" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-like" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'like')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-like" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'like')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-love" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'love')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-bad" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'bad')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-feelings" id="galaxy-quest-1999-love" autocomplete="off" onclick="updateFeelings('galaxy-quest-1999', 'love')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-bad" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-neutral" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-neutral" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-good" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'good')" />
-            <label class="btn btn-secondary" for="galaxy-quest-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="galaxy-quest-1999-technical" id="galaxy-quest-1999-good" autocomplete="off" onclick="updateTechnical('galaxy-quest-1999', 'good')" />
+                    <label class="btn btn-secondary" for="galaxy-quest-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Star Wars: Episode I – The Phantom Menace</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/27Vc" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-unseen" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Star Wars: Episode I – The Phantom Menace (1999) <a href="https://boxd.it/27Vc" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-unseen" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-dislike" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-dislike" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-fine" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'fine')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-fine" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-like" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'like')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-like" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'like')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-love" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'love')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-bad" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'bad')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-feelings" id="star-wars-episode-i--the-phantom-menace-1999-love" autocomplete="off" onclick="updateFeelings('star-wars-episode-i--the-phantom-menace-1999', 'love')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-bad" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-neutral" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-neutral" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-good" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'good')" />
-            <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="star-wars-episode-i--the-phantom-menace-1999-technical" id="star-wars-episode-i--the-phantom-menace-1999-good" autocomplete="off" onclick="updateTechnical('star-wars-episode-i--the-phantom-menace-1999', 'good')" />
+                    <label class="btn btn-secondary" for="star-wars-episode-i--the-phantom-menace-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Blair Witch Project</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/26ua" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-unseen" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Blair Witch Project (1999) <a href="https://boxd.it/26ua" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-unseen" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-dislike" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-dislike" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-fine" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'fine')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-fine" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-like" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'like')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-like" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'like')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-love" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'love')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-bad" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'bad')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-feelings" id="the-blair-witch-project-1999-love" autocomplete="off" onclick="updateFeelings('the-blair-witch-project-1999', 'love')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-bad" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-neutral" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-neutral" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-good" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'good')" />
-            <label class="btn btn-secondary" for="the-blair-witch-project-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-blair-witch-project-1999-technical" id="the-blair-witch-project-1999-good" autocomplete="off" onclick="updateTechnical('the-blair-witch-project-1999', 'good')" />
+                    <label class="btn btn-secondary" for="the-blair-witch-project-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Mummy</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/2a7a" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-unseen" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-mummy-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Mummy (1999) <a href="https://boxd.it/2a7a" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-unseen" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-mummy-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-dislike" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-dislike" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-fine" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'fine')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-fine" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-like" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'like')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-like" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'like')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-love" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'love')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-bad" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'bad')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-feelings" id="the-mummy-1999-love" autocomplete="off" onclick="updateFeelings('the-mummy-1999', 'love')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-bad" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-neutral" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-mummy-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-neutral" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-mummy-1999-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-good" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'good')" />
-            <label class="btn btn-secondary" for="the-mummy-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-mummy-1999-technical" id="the-mummy-1999-good" autocomplete="off" onclick="updateTechnical('the-mummy-1999', 'good')" />
+                    <label class="btn btn-secondary" for="the-mummy-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Sixth Sense</td>
-    <td>1999</td>
-    <td><a href="https://boxd.it/29Js" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-unseen" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Sixth Sense (1999) <a href="https://boxd.it/29Js" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-unseen" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-dislike" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'dislike')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-dislike" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-fine" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'fine')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-fine" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'fine')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-like" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'like')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-like" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'like')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-love" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'love')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-bad" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'bad')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-feelings" id="the-sixth-sense-1999-love" autocomplete="off" onclick="updateFeelings('the-sixth-sense-1999', 'love')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-bad" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'bad')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-neutral" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-neutral" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-good" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'good')" />
-            <label class="btn btn-secondary" for="the-sixth-sense-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-sixth-sense-1999-technical" id="the-sixth-sense-1999-good" autocomplete="off" onclick="updateTechnical('the-sixth-sense-1999', 'good')" />
+                    <label class="btn btn-secondary" for="the-sixth-sense-1999-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Cast Away</td>
-    <td>2000</td>
-    <td><a href="https://boxd.it/20i8" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-unseen" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'unseen')" checked />
-            <label class="btn btn-secondary" for="cast-away-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Cast Away (2000) <a href="https://boxd.it/20i8" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-unseen" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="cast-away-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-dislike" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'dislike')" />
-            <label class="btn btn-secondary" for="cast-away-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-dislike" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'dislike')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-fine" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'fine')" />
-            <label class="btn btn-secondary" for="cast-away-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-fine" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'fine')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-like" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'like')" />
-            <label class="btn btn-secondary" for="cast-away-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-like" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'like')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-love" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'love')" />
-            <label class="btn btn-secondary" for="cast-away-2000-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-bad" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'bad')" />
-            <label class="btn btn-secondary" for="cast-away-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-feelings" id="cast-away-2000-love" autocomplete="off" onclick="updateFeelings('cast-away-2000', 'love')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-bad" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'bad')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-neutral" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'neutral')" checked />
-            <label class="btn btn-secondary" for="cast-away-2000-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-neutral" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="cast-away-2000-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-good" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'good')" />
-            <label class="btn btn-secondary" for="cast-away-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="cast-away-2000-technical" id="cast-away-2000-good" autocomplete="off" onclick="updateTechnical('cast-away-2000', 'good')" />
+                    <label class="btn btn-secondary" for="cast-away-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>O Brother, Where Art Thou?</td>
-    <td>2000</td>
-    <td><a href="https://boxd.it/2b3I" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-unseen" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'unseen')" checked />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">O Brother, Where Art Thou? (2000) <a href="https://boxd.it/2b3I" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-unseen" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-dislike" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'dislike')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-dislike" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'dislike')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-fine" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'fine')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-fine" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'fine')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-like" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'like')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-like" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'like')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-love" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'love')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-bad" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'bad')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-feelings" id="o-brother-where-art-thou-2000-love" autocomplete="off" onclick="updateFeelings('o-brother-where-art-thou-2000', 'love')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-bad" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'bad')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-neutral" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'neutral')" checked />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-neutral" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-good" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'good')" />
-            <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="o-brother-where-art-thou-2000-technical" id="o-brother-where-art-thou-2000-good" autocomplete="off" onclick="updateTechnical('o-brother-where-art-thou-2000', 'good')" />
+                    <label class="btn btn-secondary" for="o-brother-where-art-thou-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Unbreakable</td>
-    <td>2000</td>
-    <td><a href="https://boxd.it/1XV2" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-unseen" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'unseen')" checked />
-            <label class="btn btn-secondary" for="unbreakable-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Unbreakable (2000) <a href="https://boxd.it/1XV2" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-unseen" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="unbreakable-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-dislike" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'dislike')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-dislike" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'dislike')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-fine" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'fine')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-fine" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'fine')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-like" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'like')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-like" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'like')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-love" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'love')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-bad" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'bad')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-feelings" id="unbreakable-2000-love" autocomplete="off" onclick="updateFeelings('unbreakable-2000', 'love')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-bad" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'bad')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-neutral" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'neutral')" checked />
-            <label class="btn btn-secondary" for="unbreakable-2000-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-neutral" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="unbreakable-2000-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-good" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'good')" />
-            <label class="btn btn-secondary" for="unbreakable-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="unbreakable-2000-technical" id="unbreakable-2000-good" autocomplete="off" onclick="updateTechnical('unbreakable-2000', 'good')" />
+                    <label class="btn btn-secondary" for="unbreakable-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>X-Men</td>
-    <td>2000</td>
-    <td><a href="https://boxd.it/1a7s" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-unseen" autocomplete="off" onclick="updateFeelings('xmen-2000', 'unseen')" checked />
-            <label class="btn btn-secondary" for="xmen-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">X-Men (2000) <a href="https://boxd.it/1a7s" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-unseen" autocomplete="off" onclick="updateFeelings('xmen-2000', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="xmen-2000-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-dislike" autocomplete="off" onclick="updateFeelings('xmen-2000', 'dislike')" />
-            <label class="btn btn-secondary" for="xmen-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-dislike" autocomplete="off" onclick="updateFeelings('xmen-2000', 'dislike')" />
+                    <label class="btn btn-secondary" for="xmen-2000-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-fine" autocomplete="off" onclick="updateFeelings('xmen-2000', 'fine')" />
-            <label class="btn btn-secondary" for="xmen-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-fine" autocomplete="off" onclick="updateFeelings('xmen-2000', 'fine')" />
+                    <label class="btn btn-secondary" for="xmen-2000-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-like" autocomplete="off" onclick="updateFeelings('xmen-2000', 'like')" />
-            <label class="btn btn-secondary" for="xmen-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-like" autocomplete="off" onclick="updateFeelings('xmen-2000', 'like')" />
+                    <label class="btn btn-secondary" for="xmen-2000-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-love" autocomplete="off" onclick="updateFeelings('xmen-2000', 'love')" />
-            <label class="btn btn-secondary" for="xmen-2000-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-bad" autocomplete="off" onclick="updateTechnical('xmen-2000', 'bad')" />
-            <label class="btn btn-secondary" for="xmen-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-feelings" id="xmen-2000-love" autocomplete="off" onclick="updateFeelings('xmen-2000', 'love')" />
+                    <label class="btn btn-secondary" for="xmen-2000-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-bad" autocomplete="off" onclick="updateTechnical('xmen-2000', 'bad')" />
+                    <label class="btn btn-secondary" for="xmen-2000-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-neutral" autocomplete="off" onclick="updateTechnical('xmen-2000', 'neutral')" checked />
-            <label class="btn btn-secondary" for="xmen-2000-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-neutral" autocomplete="off" onclick="updateTechnical('xmen-2000', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="xmen-2000-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-good" autocomplete="off" onclick="updateTechnical('xmen-2000', 'good')" />
-            <label class="btn btn-secondary" for="xmen-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="xmen-2000-technical" id="xmen-2000-good" autocomplete="off" onclick="updateTechnical('xmen-2000', 'good')" />
+                    <label class="btn btn-secondary" for="xmen-2000-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Harry Potter and the Philosopher's Stone</td>
-    <td>2001</td>
-    <td><a href="https://boxd.it/29QS" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-unseen" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'unseen')" checked />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Harry Potter and the Philosopher's Stone (2001) <a href="https://boxd.it/29QS" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-unseen" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-dislike" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'dislike')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-dislike" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'dislike')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-fine" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'fine')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-fine" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'fine')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-like" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'like')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-like" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'like')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-love" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'love')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-bad" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'bad')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-feelings" id="harry-potter-and-the-philosophers-stone-2001-love" autocomplete="off" onclick="updateFeelings('harry-potter-and-the-philosophers-stone-2001', 'love')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-bad" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'bad')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-neutral" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'neutral')" checked />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-neutral" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-good" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'good')" />
-            <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="harry-potter-and-the-philosophers-stone-2001-technical" id="harry-potter-and-the-philosophers-stone-2001-good" autocomplete="off" onclick="updateTechnical('harry-potter-and-the-philosophers-stone-2001', 'good')" />
+                    <label class="btn btn-secondary" for="harry-potter-and-the-philosophers-stone-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Ocean's Eleven</td>
-    <td>2001</td>
-    <td><a href="https://boxd.it/2aZm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-unseen" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'unseen')" checked />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Ocean's Eleven (2001) <a href="https://boxd.it/2aZm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-unseen" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-dislike" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'dislike')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-dislike" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'dislike')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-fine" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'fine')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-fine" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'fine')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-like" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'like')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-like" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'like')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-love" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'love')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-bad" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'bad')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-feelings" id="oceans-eleven-2001-love" autocomplete="off" onclick="updateFeelings('oceans-eleven-2001', 'love')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-bad" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'bad')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-neutral" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'neutral')" checked />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-neutral" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-good" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'good')" />
-            <label class="btn btn-secondary" for="oceans-eleven-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="oceans-eleven-2001-technical" id="oceans-eleven-2001-good" autocomplete="off" onclick="updateTechnical('oceans-eleven-2001', 'good')" />
+                    <label class="btn btn-secondary" for="oceans-eleven-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Shrek</td>
-    <td>2001</td>
-    <td><a href="https://boxd.it/29zi" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-unseen" autocomplete="off" onclick="updateFeelings('shrek-2001', 'unseen')" checked />
-            <label class="btn btn-secondary" for="shrek-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Shrek (2001) <a href="https://boxd.it/29zi" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-unseen" autocomplete="off" onclick="updateFeelings('shrek-2001', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="shrek-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-dislike" autocomplete="off" onclick="updateFeelings('shrek-2001', 'dislike')" />
-            <label class="btn btn-secondary" for="shrek-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-dislike" autocomplete="off" onclick="updateFeelings('shrek-2001', 'dislike')" />
+                    <label class="btn btn-secondary" for="shrek-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-fine" autocomplete="off" onclick="updateFeelings('shrek-2001', 'fine')" />
-            <label class="btn btn-secondary" for="shrek-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-fine" autocomplete="off" onclick="updateFeelings('shrek-2001', 'fine')" />
+                    <label class="btn btn-secondary" for="shrek-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-like" autocomplete="off" onclick="updateFeelings('shrek-2001', 'like')" />
-            <label class="btn btn-secondary" for="shrek-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-like" autocomplete="off" onclick="updateFeelings('shrek-2001', 'like')" />
+                    <label class="btn btn-secondary" for="shrek-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-love" autocomplete="off" onclick="updateFeelings('shrek-2001', 'love')" />
-            <label class="btn btn-secondary" for="shrek-2001-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-bad" autocomplete="off" onclick="updateTechnical('shrek-2001', 'bad')" />
-            <label class="btn btn-secondary" for="shrek-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-feelings" id="shrek-2001-love" autocomplete="off" onclick="updateFeelings('shrek-2001', 'love')" />
+                    <label class="btn btn-secondary" for="shrek-2001-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-bad" autocomplete="off" onclick="updateTechnical('shrek-2001', 'bad')" />
+                    <label class="btn btn-secondary" for="shrek-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-neutral" autocomplete="off" onclick="updateTechnical('shrek-2001', 'neutral')" checked />
-            <label class="btn btn-secondary" for="shrek-2001-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-neutral" autocomplete="off" onclick="updateTechnical('shrek-2001', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="shrek-2001-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-good" autocomplete="off" onclick="updateTechnical('shrek-2001', 'good')" />
-            <label class="btn btn-secondary" for="shrek-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="shrek-2001-technical" id="shrek-2001-good" autocomplete="off" onclick="updateTechnical('shrek-2001', 'good')" />
+                    <label class="btn btn-secondary" for="shrek-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Fast and the Furious</td>
-    <td>2001</td>
-    <td><a href="https://boxd.it/1XMu" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-unseen" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Fast and the Furious (2001) <a href="https://boxd.it/1XMu" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-unseen" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-dislike" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'dislike')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-dislike" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-fine" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'fine')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-fine" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'fine')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-like" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'like')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-like" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'like')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-love" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'love')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-bad" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'bad')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-feelings" id="the-fast-and-the-furious-2001-love" autocomplete="off" onclick="updateFeelings('the-fast-and-the-furious-2001', 'love')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-bad" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'bad')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-neutral" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-neutral" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-good" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'good')" />
-            <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-fast-and-the-furious-2001-technical" id="the-fast-and-the-furious-2001-good" autocomplete="off" onclick="updateTechnical('the-fast-and-the-furious-2001', 'good')" />
+                    <label class="btn btn-secondary" for="the-fast-and-the-furious-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Lord of the Rings: The Fellowship of the Ring</td>
-    <td>2001</td>
-    <td><a href="https://boxd.it/2b5O" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-unseen" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Lord of the Rings: The Fellowship of the Ring (2001) <a href="https://boxd.it/2b5O" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-unseen" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-dislike" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'dislike')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-dislike" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-fine" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'fine')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-fine" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'fine')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-like" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'like')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-like" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'like')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-love" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'love')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-bad" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'bad')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-feelings" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-love" autocomplete="off" onclick="updateFeelings('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'love')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-bad" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'bad')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-neutral" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-neutral" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-good" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'good')" />
-            <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-technical" id="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-good" autocomplete="off" onclick="updateTechnical('the-lord-of-the-rings-the-fellowship-of-the-ring-2001', 'good')" />
+                    <label class="btn btn-secondary" for="the-lord-of-the-rings-the-fellowship-of-the-ring-2001-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>A Walk to Remember</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/1WLq" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-unseen" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">A Walk to Remember (2002) <a href="https://boxd.it/1WLq" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-unseen" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-dislike" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-dislike" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-fine" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'fine')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-fine" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-like" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'like')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-like" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'like')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-love" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'love')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-bad" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'bad')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-feelings" id="a-walk-to-remember-2002-love" autocomplete="off" onclick="updateFeelings('a-walk-to-remember-2002', 'love')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-bad" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-neutral" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-neutral" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-good" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'good')" />
-            <label class="btn btn-secondary" for="a-walk-to-remember-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="a-walk-to-remember-2002-technical" id="a-walk-to-remember-2002-good" autocomplete="off" onclick="updateTechnical('a-walk-to-remember-2002', 'good')" />
+                    <label class="btn btn-secondary" for="a-walk-to-remember-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>About a Boy</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/2aMC" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-unseen" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="about-a-boy-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">About a Boy (2002) <a href="https://boxd.it/2aMC" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-unseen" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-dislike" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-dislike" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-fine" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'fine')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-fine" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-like" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'like')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-like" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'like')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-love" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'love')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-bad" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'bad')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-feelings" id="about-a-boy-2002-love" autocomplete="off" onclick="updateFeelings('about-a-boy-2002', 'love')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-bad" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-neutral" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="about-a-boy-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-neutral" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-good" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'good')" />
-            <label class="btn btn-secondary" for="about-a-boy-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="about-a-boy-2002-technical" id="about-a-boy-2002-good" autocomplete="off" onclick="updateTechnical('about-a-boy-2002', 'good')" />
+                    <label class="btn btn-secondary" for="about-a-boy-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Catch Me If You Can</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/29VS" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-unseen" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Catch Me If You Can (2002) <a href="https://boxd.it/29VS" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-unseen" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-dislike" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-dislike" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-fine" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'fine')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-fine" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-like" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'like')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-like" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'like')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-love" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'love')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-bad" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'bad')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-feelings" id="catch-me-if-you-can-2002-love" autocomplete="off" onclick="updateFeelings('catch-me-if-you-can-2002', 'love')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-bad" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-neutral" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-neutral" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-good" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'good')" />
-            <label class="btn btn-secondary" for="catch-me-if-you-can-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="catch-me-if-you-can-2002-technical" id="catch-me-if-you-can-2002-good" autocomplete="off" onclick="updateTechnical('catch-me-if-you-can-2002', 'good')" />
+                    <label class="btn btn-secondary" for="catch-me-if-you-can-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Kung Pow: Enter the Fist</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/1SQm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-unseen" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Kung Pow: Enter the Fist (2002) <a href="https://boxd.it/1SQm" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-unseen" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-dislike" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-dislike" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-fine" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'fine')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-fine" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-like" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'like')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-like" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'like')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-love" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'love')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-bad" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'bad')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-feelings" id="kung-pow-enter-the-fist-2002-love" autocomplete="off" onclick="updateFeelings('kung-pow-enter-the-fist-2002', 'love')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-bad" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-neutral" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-neutral" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-good" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'good')" />
-            <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="kung-pow-enter-the-fist-2002-technical" id="kung-pow-enter-the-fist-2002-good" autocomplete="off" onclick="updateTechnical('kung-pow-enter-the-fist-2002', 'good')" />
+                    <label class="btn btn-secondary" for="kung-pow-enter-the-fist-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Minority Report</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/2aWi" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-unseen" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="minority-report-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Minority Report (2002) <a href="https://boxd.it/2aWi" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-unseen" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="minority-report-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-dislike" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="minority-report-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-dislike" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-fine" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'fine')" />
-            <label class="btn btn-secondary" for="minority-report-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-fine" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-like" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'like')" />
-            <label class="btn btn-secondary" for="minority-report-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-like" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'like')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-love" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'love')" />
-            <label class="btn btn-secondary" for="minority-report-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-bad" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'bad')" />
-            <label class="btn btn-secondary" for="minority-report-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-feelings" id="minority-report-2002-love" autocomplete="off" onclick="updateFeelings('minority-report-2002', 'love')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-bad" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-neutral" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="minority-report-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-neutral" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="minority-report-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-good" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'good')" />
-            <label class="btn btn-secondary" for="minority-report-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="minority-report-2002-technical" id="minority-report-2002-good" autocomplete="off" onclick="updateTechnical('minority-report-2002', 'good')" />
+                    <label class="btn btn-secondary" for="minority-report-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Scooby-Doo</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/1YaQ" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-unseen" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="scoobydoo-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Scooby-Doo (2002) <a href="https://boxd.it/1YaQ" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-unseen" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-dislike" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-dislike" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-fine" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'fine')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-fine" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-like" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'like')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-like" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'like')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-love" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'love')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-bad" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'bad')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-feelings" id="scoobydoo-2002-love" autocomplete="off" onclick="updateFeelings('scoobydoo-2002', 'love')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-bad" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-neutral" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="scoobydoo-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-neutral" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-good" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'good')" />
-            <label class="btn btn-secondary" for="scoobydoo-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="scoobydoo-2002-technical" id="scoobydoo-2002-good" autocomplete="off" onclick="updateTechnical('scoobydoo-2002', 'good')" />
+                    <label class="btn btn-secondary" for="scoobydoo-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Spider-Man</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/2a8i" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-unseen" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="spiderman-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Spider-Man (2002) <a href="https://boxd.it/2a8i" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-unseen" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="spiderman-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-dislike" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="spiderman-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-dislike" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-fine" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'fine')" />
-            <label class="btn btn-secondary" for="spiderman-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-fine" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-like" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'like')" />
-            <label class="btn btn-secondary" for="spiderman-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-like" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'like')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-love" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'love')" />
-            <label class="btn btn-secondary" for="spiderman-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-bad" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'bad')" />
-            <label class="btn btn-secondary" for="spiderman-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-feelings" id="spiderman-2002-love" autocomplete="off" onclick="updateFeelings('spiderman-2002', 'love')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-bad" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-neutral" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="spiderman-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-neutral" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="spiderman-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-good" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'good')" />
-            <label class="btn btn-secondary" for="spiderman-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="spiderman-2002-technical" id="spiderman-2002-good" autocomplete="off" onclick="updateTechnical('spiderman-2002', 'good')" />
+                    <label class="btn btn-secondary" for="spiderman-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Count of Monte Cristo</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/1U24" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-unseen" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Count of Monte Cristo (2002) <a href="https://boxd.it/1U24" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-unseen" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-dislike" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-dislike" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-fine" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'fine')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-fine" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-like" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'like')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-like" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'like')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-love" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'love')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-bad" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'bad')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-feelings" id="the-count-of-monte-cristo-2002-love" autocomplete="off" onclick="updateFeelings('the-count-of-monte-cristo-2002', 'love')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-bad" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-neutral" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-neutral" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-good" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'good')" />
-            <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-count-of-monte-cristo-2002-technical" id="the-count-of-monte-cristo-2002-good" autocomplete="off" onclick="updateTechnical('the-count-of-monte-cristo-2002', 'good')" />
+                    <label class="btn btn-secondary" for="the-count-of-monte-cristo-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Mothman Prophecies</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/26xo" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-unseen" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Mothman Prophecies (2002) <a href="https://boxd.it/26xo" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-unseen" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-dislike" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-dislike" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-fine" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'fine')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-fine" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-like" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'like')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-like" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'like')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-love" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'love')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-bad" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'bad')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-feelings" id="the-mothman-prophecies-2002-love" autocomplete="off" onclick="updateFeelings('the-mothman-prophecies-2002', 'love')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-bad" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-neutral" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-neutral" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-good" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'good')" />
-            <label class="btn btn-secondary" for="the-mothman-prophecies-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-mothman-prophecies-2002-technical" id="the-mothman-prophecies-2002-good" autocomplete="off" onclick="updateTechnical('the-mothman-prophecies-2002', 'good')" />
+                    <label class="btn btn-secondary" for="the-mothman-prophecies-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Ring</td>
-    <td>2002</td>
-    <td><a href="https://boxd.it/2a70" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-unseen" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-ring-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Ring (2002) <a href="https://boxd.it/2a70" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-unseen" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-ring-2002-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-dislike" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'dislike')" />
-            <label class="btn btn-secondary" for="the-ring-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-dislike" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-fine" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'fine')" />
-            <label class="btn btn-secondary" for="the-ring-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-fine" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'fine')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-like" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'like')" />
-            <label class="btn btn-secondary" for="the-ring-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-like" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'like')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-love" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'love')" />
-            <label class="btn btn-secondary" for="the-ring-2002-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-bad" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'bad')" />
-            <label class="btn btn-secondary" for="the-ring-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-feelings" id="the-ring-2002-love" autocomplete="off" onclick="updateFeelings('the-ring-2002', 'love')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-bad" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'bad')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-neutral" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-ring-2002-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-neutral" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-ring-2002-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-good" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'good')" />
-            <label class="btn btn-secondary" for="the-ring-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-ring-2002-technical" id="the-ring-2002-good" autocomplete="off" onclick="updateTechnical('the-ring-2002', 'good')" />
+                    <label class="btn btn-secondary" for="the-ring-2002-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>Big Fish</td>
-    <td>2003</td>
-    <td><a href="https://boxd.it/2a3M" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-unseen" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'unseen')" checked />
-            <label class="btn btn-secondary" for="big-fish-2003-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">Big Fish (2003) <a href="https://boxd.it/2a3M" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-unseen" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="big-fish-2003-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-dislike" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'dislike')" />
-            <label class="btn btn-secondary" for="big-fish-2003-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-dislike" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'dislike')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-fine" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'fine')" />
-            <label class="btn btn-secondary" for="big-fish-2003-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-fine" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'fine')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-like" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'like')" />
-            <label class="btn btn-secondary" for="big-fish-2003-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-like" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'like')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-love" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'love')" />
-            <label class="btn btn-secondary" for="big-fish-2003-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-bad" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'bad')" />
-            <label class="btn btn-secondary" for="big-fish-2003-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-feelings" id="big-fish-2003-love" autocomplete="off" onclick="updateFeelings('big-fish-2003', 'love')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-bad" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'bad')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-neutral" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'neutral')" checked />
-            <label class="btn btn-secondary" for="big-fish-2003-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-neutral" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="big-fish-2003-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-good" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'good')" />
-            <label class="btn btn-secondary" for="big-fish-2003-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="big-fish-2003-technical" id="big-fish-2003-good" autocomplete="off" onclick="updateTechnical('big-fish-2003', 'good')" />
+                    <label class="btn btn-secondary" for="big-fish-2003-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
 <tr>
-    <td>The Chronicles of Narnia: The Lion, the Witch and the Wardrobe</td>
-    <td>2005</td>
-    <td><a href="https://boxd.it/2ark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></td>
     <td>
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-unseen" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'unseen')" checked />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-unseen"><i class="fa-regular fa-eye-slash"></i></label>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="mb-3">The Chronicles of Narnia: The Lion, the Witch and the Wardrobe (2005) <a href="https://boxd.it/2ark" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-link"></i></a></h4>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-unseen" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'unseen')" checked />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-unseen"><i class="fa-regular fa-eye-slash"></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-dislike" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'dislike')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-dislike" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'dislike')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-dislike"><i class="fa-regular fa-thumbs-down"></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-fine" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'fine')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-fine"><i class="fa-regular fa-face-meh"></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-fine" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'fine')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-fine"><i class="fa-regular fa-face-meh"></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-like" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'like')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-like"><i class="fa-regular fa-thumbs-up"></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-like" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'like')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-like"><i class="fa-regular fa-thumbs-up"></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-love" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'love')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-love"><i class="fa-regular fa-heart"></i></label>
-        </div>
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <div class="btn-group">
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-bad" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'bad')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-bad"><i class="fa-solid fa-poo"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-feelings" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-love" autocomplete="off" onclick="updateFeelings('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'love')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-love"><i class="fa-regular fa-heart"></i></label>
+                </div>
+                <div></div>
+                <div class="btn-group">
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-bad" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'bad')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-bad"><i class="fa-solid fa-poo"></i></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-neutral" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'neutral')" checked />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-neutral"><i class="fa-solid fa-minus"></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-neutral" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'neutral')" checked />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-neutral"><i class="fa-solid fa-minus"></i></label>
 
-            <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-good" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'good')" />
-            <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-good"><i class="fa-solid fa-trophy"></i></i></label>
+                    <input type="radio" class="btn-check" name="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-technical" id="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-good" autocomplete="off" onclick="updateTechnical('the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005', 'good')" />
+                    <label class="btn btn-secondary" for="the-chronicles-of-narnia-the-lion-the-witch-and-the-wardrobe-2005-good"><i class="fa-solid fa-trophy"></i></i></label>
+                </div>
+            </div>
         </div>
     </td>
 </tr>
 
-        </tbody>
-    </table>
-    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current results</button></div>
-</div>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current ratings</button></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

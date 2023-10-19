@@ -26,91 +26,93 @@
     ></script>
 </head>
 <body>
-<script>
-    const rawTitle = '$title';
-    const title = rawTitle.replaceAll(" ", "_").toLowerCase();
+    <script>
+        const rawTitle = '$title';
+        const title = rawTitle.replaceAll(" ", "_").toLowerCase();
 
-    function updateFeelings(uuid, choice) {
-        removeOrSetLocalStorage(uuid, choice, "feelings", "unseen");
-    }
-
-    function updateTechnical(uuid, choice) {
-        removeOrSetLocalStorage(uuid, choice, "technical", "neutral");
-    }
-
-    function removeOrSetLocalStorage(uuid, choice, ending, removalEquality) {
-        const key = title + "_____" + uuid + "_____" + ending;
-        if (choice === removalEquality) {
-            localStorage.removeItem(key);
-        } else {
-            localStorage.setItem(key, choice);
+        function updateFeelings(uuid, choice) {
+            removeOrSetLocalStorage(uuid, choice, "feelings", "unseen");
         }
-    }
 
-    function downloadResults() {
-        const results = [];
-        const checkedElements = document.querySelectorAll('input:checked');
-        checkedElements.forEach(function (e) {
-           results.push(e.id);
-        });
+        function updateTechnical(uuid, choice) {
+            removeOrSetLocalStorage(uuid, choice, "technical", "neutral");
+        }
 
-        const localJson = JSON.stringify(results);
-
-        const a = document.createElement('a');
-        document.body.appendChild(a);
-
-        a.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(localJson));
-        a.setAttribute('download', title + '_your_name_here.json');
-        a.click();
-    }
-
-    function loadExistingRatings() {
-        const allKeys = Object.keys(localStorage);
-
-        const allRelevantKeys = allKeys.filter(function (key) {
-            return key.startsWith(title);
-        });
-
-        allRelevantKeys.forEach(function(key) {
-            const split = key.split("_____");
-            const uuid = split[1];
-            const value = localStorage.getItem(key);
-            const id = '#' + uuid + "-" + value;
-            const element = document.querySelector(id);
-            if (element) {
-                element.checked = true;
+        function removeOrSetLocalStorage(uuid, choice, ending, removalEquality) {
+            const key = title + "_____" + uuid + "_____" + ending;
+            if (choice === removalEquality) {
+                localStorage.removeItem(key);
+            } else {
+                localStorage.setItem(key, choice);
             }
-
-        });
-    }
-
-    window.addEventListener('load', function () {
-        loadExistingRatings();
-        const element = document.querySelector('#list-main-div');
-        if (element) {
-            element.hidden = false;
         }
-    })
 
-</script>
+        function downloadResults() {
+            const results = [];
+            const checkedElements = document.querySelectorAll('input:checked');
+            checkedElements.forEach(function (e) {
+               results.push(e.id);
+            });
 
-<div id="list-main-div" hidden>
-    <h1 class="mb-3">$title</h1>
-    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current ratings</button></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Year</th>
-            <th scope="col">Link</th>
-            <th scope="col">Ratings</th>
-        </tr>
-        </thead>
-        <tbody>
-            $items
-        </tbody>
-    </table>
-    <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current results</button></div>
-</div>
+            const localJson = JSON.stringify(results);
+
+            const a = document.createElement('a');
+            document.body.appendChild(a);
+
+            a.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(localJson));
+            a.setAttribute('download', title + '_your_name_here.json');
+            a.click();
+        }
+
+        function loadExistingRatings() {
+            const allKeys = Object.keys(localStorage);
+
+            const allRelevantKeys = allKeys.filter(function (key) {
+                return key.startsWith(title);
+            });
+
+            allRelevantKeys.forEach(function(key) {
+                const split = key.split("_____");
+                const uuid = split[1];
+                const value = localStorage.getItem(key);
+                const id = '#' + uuid + "-" + value;
+                const element = document.querySelector(id);
+                if (element) {
+                    element.checked = true;
+                }
+
+            });
+        }
+
+        window.addEventListener('load', function () {
+            loadExistingRatings();
+            const element = document.querySelector('#list-main-div');
+            if (element) {
+                element.hidden = false;
+            }
+        })
+    </script>
+
+    <div id="list-main-div" class="text-center" hidden>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h1 class="mb-3">$title</h1>
+            </div>
+        </div>
+
+        <table class="table">
+            <tbody>
+                $items
+            </tbody>
+        </table>
+
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div><button type="button" class="btn btn-primary" onclick="downloadResults()">download current ratings</button></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

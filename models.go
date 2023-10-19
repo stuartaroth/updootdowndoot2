@@ -16,10 +16,9 @@ type VotingList struct {
 }
 
 type VotingItem struct {
-	Name        string `json:"name"`
-	Year        string `json:"year"`
-	Link        string `json:"link"`
-	Description string `json:"description"`
+	Name string `json:"name"`
+	Year string `json:"year"`
+	Link string `json:"link"`
 }
 
 func (item VotingItem) UniqueKey() string {
