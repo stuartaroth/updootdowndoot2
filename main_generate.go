@@ -1,11 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 )
 
@@ -64,8 +64,18 @@ func mainGenerate() {
 }
 
 func generateIndexHtml(linkFilenames map[string]string, indexTemplate string, linkTemplate string, generatedDir string) error {
+
+	linkKeys := []string{}
+	for key, _ := range linkFilenames {
+		linkKeys = append(linkKeys, key)
+	}
+
+	sort.Strings(linkKeys)
+
 	links := []string{}
-	for key, value := range linkFilenames {
+	for i := range linkKeys {
+		key := linkKeys[i]
+		value := linkFilenames[key]
 		localLinkTemplate := linkTemplate
 		localLinkTemplate = strings.Replace(localLinkTemplate, "$link", key, -1)
 		localLinkTemplate = strings.Replace(localLinkTemplate, "$name", value, -1)
@@ -139,13 +149,7 @@ func getVotingLists(jsonDir string) ([]VotingList, error) {
 	for _, e := range entries {
 		if !e.IsDir() {
 			fullPath := fmt.Sprintf("%v/%v", jsonDir, e.Name())
-			bits, err := os.ReadFile(fullPath)
-			if err != nil {
-				return lists, err
-			}
-
-			var list VotingList
-			err = json.Unmarshal(bits, &list)
+			list, err := getVotingListFromFile(fullPath)
 			if err != nil {
 				return lists, err
 			}
@@ -178,10 +182,6 @@ func cleanGeneratedDir(generatedDir string) error {
 	}
 
 	for _, e := range entries {
-		if e.Name() == ".do" {
-			continue
-		}
-
 		fullPath := fmt.Sprintf("%v/%v", generatedDir, e.Name())
 		if e.IsDir() {
 			err = os.RemoveAll(fullPath)
