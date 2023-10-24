@@ -2,10 +2,26 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+)
+
+var (
+	validRatings = map[string]bool{
+		"unseen":   true,
+		"dislike":  true,
+		"fine":     true,
+		"like":     true,
+		"love":     true,
+		"terrible": true,
+		"bad":      true,
+		"neutral":  true,
+		"good":     true,
+		"great":    true,
+	}
 )
 
 func mainAnalyze() {
@@ -31,6 +47,88 @@ func mainAnalyze() {
 	}
 
 	log.Println(list)
+
+	uniqueKeyToRatingsToUsers := make(map[string]map[string][]string)
+	uniqueKeyToItem := make(map[string]VotingItem)
+
+	for _, item := range list.Items {
+		uniqueKeyToRatingsToUsers[item.UniqueKey()] = map[string][]string{
+			"unseen":   {},
+			"dislike":  {},
+			"fine":     {},
+			"like":     {},
+			"love":     {},
+			"terrible": {},
+			"bad":      {},
+			"neutral":  {},
+			"good":     {},
+			"great":    {},
+		}
+
+		uniqueKeyToItem[item.UniqueKey()] = item
+	}
+
+	for userFilename, userRatings := range inputData {
+		log.Println(userFilename)
+		for _, s := range userRatings {
+			uniqueKey, rating, err := getUniqueKeyAndRating(s)
+			if err != nil {
+				continue
+			}
+
+			uniqueKeyValue, exists := uniqueKeyToRatingsToUsers[uniqueKey]
+			if !exists {
+				continue
+			}
+
+			ratingValue, exists := uniqueKeyValue[rating]
+			if !exists {
+				continue
+			}
+
+			ratingValue = append(ratingValue, userFilename)
+			uniqueKeyValue[rating] = ratingValue
+			uniqueKeyToRatingsToUsers[uniqueKey] = uniqueKeyValue
+		}
+	}
+
+	votingItemResults := []VotingItemResult{}
+
+	for uniqueKey, ratingsToUsers := range uniqueKeyToRatingsToUsers {
+		votingItem, exists := uniqueKeyToItem[uniqueKey]
+		if !exists {
+			continue
+		}
+
+		vir := VotingItemResult{
+			VotingItem: votingItem,
+			Unseen:     getSpecificRatingsToUsers(ratingsToUsers, "unseen"),
+			Dislike:    getSpecificRatingsToUsers(ratingsToUsers, "dislike"),
+			Fine:       getSpecificRatingsToUsers(ratingsToUsers, "fine"),
+			Like:       getSpecificRatingsToUsers(ratingsToUsers, "like"),
+			Love:       getSpecificRatingsToUsers(ratingsToUsers, "love"),
+			Terrible:   getSpecificRatingsToUsers(ratingsToUsers, "terrible"),
+			Bad:        getSpecificRatingsToUsers(ratingsToUsers, "bad"),
+			Neutral:    getSpecificRatingsToUsers(ratingsToUsers, "neutral"),
+			Good:       getSpecificRatingsToUsers(ratingsToUsers, "good"),
+			Great:      getSpecificRatingsToUsers(ratingsToUsers, "great"),
+		}
+
+		votingItemResults = append(votingItemResults, vir)
+	}
+
+	for _, vir := range votingItemResults {
+		log.Println(vir)
+	}
+}
+
+func getSpecificRatingsToUsers(ratingsToUsers map[string][]string, key string) []string {
+	ratings, exists := ratingsToUsers[key]
+	if !exists {
+		return []string{}
+	}
+
+	return ratings
 }
 
 func getVotingListFromFile(filename string) (VotingList, error) {
@@ -46,6 +144,22 @@ func getVotingListFromFile(filename string) (VotingList, error) {
 	}
 
 	return vl, nil
+}
+
+func getUniqueKeyAndRating(s string) (string, string, error) {
+	index := strings.LastIndex(s, "-")
+	if index == -1 || index == len(s)-1 {
+		return "", "", errors.New("entry missing hyphen or hypen at end")
+	}
+
+	uniqueKey := s[:index]
+	rating := s[index+1:]
+	_, exists := validRatings[rating]
+	if !exists {
+		return "", "", errors.New("invalid rating")
+	}
+
+	return uniqueKey, rating, nil
 }
 
 func getAllInputData(inputDirectory string) (map[string][]string, error) {

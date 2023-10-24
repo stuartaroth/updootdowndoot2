@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -14,6 +15,11 @@ func mainGenerate() {
 
 	generatedDir := "generated_web"
 	err := cleanGeneratedDir(generatedDir)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	imageTemplate, err := getTemplateString("templates/image.html")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -47,20 +53,58 @@ func mainGenerate() {
 	}
 
 	linkFilenames := make(map[string]string)
+	allKeys := make(map[string]bool)
 
 	for _, list := range lists {
 		outputFilename := getOutputFilename(list.Name)
 		linkFilenames[outputFilename] = list.Name
-		err = generateListHtml(list, listTemplate, itemTemplate, generatedDir, outputFilename)
+		err = generateListHtml(list, listTemplate, itemTemplate, imageTemplate, generatedDir, outputFilename)
 		if err != nil {
 			log.Fatal(err)
 		}
+
+		addUniqueKeys(list, allKeys)
 	}
 
 	err = generateIndexHtml(linkFilenames, indexTemplate, linkTemplate, generatedDir)
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	err = generateAllKeysJson(generatedDir, allKeys)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func addUniqueKeys(list VotingList, allKeys map[string]bool) {
+	for _, item := range list.Items {
+		allKeys[item.UniqueKey()] = true
+	}
+}
+
+func generateAllKeysJson(generatedDir string, allKeys map[string]bool) error {
+	localKeys := []string{}
+
+	for key, _ := range allKeys {
+		localKeys = append(localKeys, key)
+	}
+
+	sort.Strings(localKeys)
+
+	bits, err := json.MarshalIndent(localKeys, "", "    ")
+	if err != nil {
+		return err
+	}
+
+	fullPath := fmt.Sprintf("%v/%v", generatedDir, "all-keys.json")
+
+	err = os.WriteFile(fullPath, bits, 0666)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func generateIndexHtml(linkFilenames map[string]string, indexTemplate string, linkTemplate string, generatedDir string) error {
@@ -98,7 +142,7 @@ func getOutputFilename(name string) string {
 	return outputFilename
 }
 
-func generateListHtml(list VotingList, listTemplate string, itemTemplate string, generatedDir string, outputFilename string) error {
+func generateListHtml(list VotingList, listTemplate string, itemTemplate string, imageTemplate string, generatedDir string, outputFilename string) error {
 	err := checkVotingList(list)
 	if err != nil {
 		return err
@@ -106,7 +150,10 @@ func generateListHtml(list VotingList, listTemplate string, itemTemplate string,
 
 	itemTemplates := []string{}
 	for _, item := range list.Items {
+		imageContent := getImageContent(imageTemplate, item, generatedDir)
+
 		localItemTemplate := itemTemplate
+		localItemTemplate = strings.Replace(localItemTemplate, "$image", imageContent, -1)
 		localItemTemplate = strings.Replace(localItemTemplate, "$name", item.Name, -1)
 		localItemTemplate = strings.Replace(localItemTemplate, "$year", item.Year, -1)
 		localItemTemplate = strings.Replace(localItemTemplate, "$link", item.Link, -1)
@@ -122,6 +169,19 @@ func generateListHtml(list VotingList, listTemplate string, itemTemplate string,
 
 	fullPath := fmt.Sprintf("%v/%v", generatedDir, outputFilename)
 	return os.WriteFile(fullPath, []byte(localListTemplate), 066)
+}
+
+func getImageContent(imageTemplate string, item VotingItem, generatedDir string) string {
+	uniqueKey := item.UniqueKey()
+	fullPath := fmt.Sprintf("%v/%v/%v.jpg", generatedDir, "images", uniqueKey)
+	_, err := os.Stat(fullPath)
+	if err != nil {
+		return ""
+	}
+
+	localImageTemplate := imageTemplate
+	localImageTemplate = strings.Replace(localImageTemplate, "$uniqueKey", uniqueKey, -1)
+	return localImageTemplate
 }
 
 func checkVotingList(list VotingList) error {
@@ -183,13 +243,13 @@ func cleanGeneratedDir(generatedDir string) error {
 
 	for _, e := range entries {
 		fullPath := fmt.Sprintf("%v/%v", generatedDir, e.Name())
-		if e.IsDir() {
-			err = os.RemoveAll(fullPath)
+		if !e.IsDir() {
+			err = os.Remove(fullPath)
 			if err != nil {
 				return err
 			}
-		} else {
-			err = os.Remove(fullPath)
+		} else if e.Name() != "images" {
+			err = os.RemoveAll(fullPath)
 			if err != nil {
 				return err
 			}

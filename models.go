@@ -21,6 +21,20 @@ type VotingItem struct {
 	Link string `json:"link"`
 }
 
+type VotingItemResult struct {
+	VotingItem VotingItem `json:"votingItem"`
+	Unseen     []string   `json:"unseen"`
+	Dislike    []string   `json:"dislike"`
+	Fine       []string   `json:"fine"`
+	Like       []string   `json:"like"`
+	Love       []string   `json:"love"`
+	Terrible   []string   `json:"terrible"`
+	Bad        []string   `json:"bad"`
+	Neutral    []string   `json:"neutral"`
+	Good       []string   `json:"good"`
+	Great      []string   `json:"great"`
+}
+
 func (item VotingItem) UniqueKey() string {
 	return fmt.Sprintf("%v-%v", sanitize(item.Name), sanitize(item.Year))
 }
