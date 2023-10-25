@@ -12,6 +12,8 @@ func main() {
 		mainGenerate()
 	} else if len(os.Args) == 4 && os.Args[1] == "letterboxd" {
 		mainLetterboxd()
+	} else if len(os.Args) == 4 && os.Args[1] == "letterboxd_rename" {
+		mainLetterboxdRename()
 	} else {
 		fmt.Println("you done messed up")
 	}

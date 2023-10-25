@@ -39,6 +39,11 @@ func (item VotingItem) UniqueKey() string {
 	return fmt.Sprintf("%v-%v", sanitize(item.Name), sanitize(item.Year))
 }
 
+type RenameProposal struct {
+	CurrentName string `json:"currentName"`
+	NewName     string `json:"newName"`
+}
+
 func sanitize(input string) string {
 	localInput := input
 	localInput = reggie.ReplaceAllString(localInput, "")
